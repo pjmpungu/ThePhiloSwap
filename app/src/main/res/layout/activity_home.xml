@@ -13,4 +13,10 @@
         android:layout_height="500dp"
         tools:layout_editor_absoluteX="113dp"
         tools:layout_editor_absoluteY="176dp" />
+
+    <Button
+        android:id="@+id/btnAddBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add your book" />
 </LinearLayout>
