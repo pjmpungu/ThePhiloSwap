@@ -6,12 +6,12 @@
 
     <application
         android:allowBackup="true"
+        android:name =".ApplicationClass"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ThePhiloSwap"
-        android:name =".ApplicationClass">
+        android:theme="@style/Theme.ThePhiloSwap">
         <activity android:name=".RequestBookActivity"></activity>
         <activity android:name=".AddBookActivity" />
         <activity android:name=".HomeActivity" />
