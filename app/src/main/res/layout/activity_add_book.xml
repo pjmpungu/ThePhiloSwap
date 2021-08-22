@@ -15,7 +15,7 @@
         android:text="Title" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -28,7 +28,7 @@
         android:text="Author" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/etAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
