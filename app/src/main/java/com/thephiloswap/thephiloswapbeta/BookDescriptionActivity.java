@@ -22,8 +22,6 @@ public class BookDescriptionActivity extends AppCompatActivity {
 
         //setup this activity so it's a popup
 
-        getSupportActionBar().hide();
-
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;

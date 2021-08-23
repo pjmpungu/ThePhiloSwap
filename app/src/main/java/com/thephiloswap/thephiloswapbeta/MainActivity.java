@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         public void handleResponse(BackendlessUser response) {
 
                             ApplicationClass.user = response;
-                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(MainActivity.this, HomeActivityFrag.class);
                             startActivity(intent);
 
                         }
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         public void handleResponse(BackendlessUser response) {
 
                             ApplicationClass.user = response;
-                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(MainActivity.this, HomeActivityFrag.class);
                             startActivity(intent);
 
                         }

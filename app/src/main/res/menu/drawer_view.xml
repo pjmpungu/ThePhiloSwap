@@ -2,16 +2,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_first_fragment"
+            android:id="@+id/home"
             android:icon="@drawable/home"
-            android:title="First" />
+            android:title="Home" />
         <item
-            android:id="@+id/nav_second_fragment"
+            android:id="@+id/my_account"
             android:icon="@drawable/home"
-            android:title="Second" />
+            android:title="My Account" />
         <item
-            android:id="@+id/nav_third_fragment"
+            android:id="@+id/my_books"
             android:icon="@drawable/home"
-            android:title="Third" />
+            android:title="My Books" />
+        <item
+            android:id="@+id/sign_out"
+            android:icon="@drawable/home"
+            android:title="Sign Out" />
     </group>
 </menu>

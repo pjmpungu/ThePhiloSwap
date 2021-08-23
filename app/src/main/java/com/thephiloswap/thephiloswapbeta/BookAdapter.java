@@ -21,10 +21,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
 
     private ArrayList<Book> books;
     ItemClicked activity;
+    boolean userBooks;
 
-    public BookAdapter(Context context, ArrayList<Book> list){
+    public BookAdapter(Context context, ArrayList<Book> list, boolean userBooks){
         books=list;
         activity = (ItemClicked) context;
+        this.userBooks = userBooks;
     }
 
     public interface ItemClicked {
@@ -65,12 +67,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
 
         holder.tvTitle.setText(books.get(position).getTitle());
         holder.tvAuthor.setText(books.get(position).getAuthor());
+        holder.itemView.setVisibility(View.GONE);
 
         //if the book owner is the same as the user, they won't see it
 
-        if(books.get(position).getOwnerEmail().equals(ApplicationClass.user.getEmail())){
+        if(books.get(position).getOwnerEmail().equals(ApplicationClass.user.getEmail()) && !userBooks){
 
-            holder.itemView.setVisibility(View.GONE);
+            holder.itemView.setVisibility(View.VISIBLE);
+
+        }else if(!books.get(position).getOwnerEmail().equals(ApplicationClass.user.getEmail()) && userBooks){
+
+            holder.itemView.setVisibility(View.VISIBLE);
 
         }
 

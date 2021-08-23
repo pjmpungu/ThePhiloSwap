@@ -9,18 +9,23 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
+import com.backendless.UserService;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.google.android.material.navigation.NavigationView;
@@ -28,31 +33,23 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements BookAdapter.ItemClicked{
+public class HomeActivity extends AppCompatActivity {
 
-    Button btnAddBook;
-    ImageButton ivRefresh;
 
-    RecyclerView recyclerView;
-    RecyclerView.Adapter myAdapter;
-    RecyclerView.LayoutManager layoutManager;
 
-    private DrawerLayout mDrawer;
-    private Toolbar toolbar;
-    private NavigationView nvDrawer;
+    DrawerLayout mDrawer;
+    Toolbar toolbar;
+    NavigationView nvDrawer;
 
     private ActionBarDrawerToggle drawerToggle;
+
+    private boolean firstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btnAddBook = findViewById(R.id.btnAddBook);
-
-        ivRefresh = findViewById(R.id.ivRefresh);
-
-        recyclerView = findViewById(R.id.list);
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,112 +73,63 @@ public class HomeActivity extends AppCompatActivity implements BookAdapter.ItemC
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
-
-        //retrieve table of books from backened and add them to our list
-
-        Backendless.Data.of(Book.class).find(new AsyncCallback<List<Book>>(){
-            @Override
-            public void handleResponse(List<Book> foundBooks )
-            {
-
-                ApplicationClass.books = foundBooks;
-                myAdapter = new BookAdapter(HomeActivity.this, (ArrayList<Book>) ApplicationClass.books);
-
-                //set adapter for recylcer view
-
-                recyclerView.setAdapter(myAdapter);
-                layoutManager = new LinearLayoutManager(HomeActivity.this);
-                recyclerView.setLayoutManager(layoutManager);
-
-            }
-            @Override
-            public void handleFault( BackendlessFault fault )
-            {
-
-                Toast.makeText(HomeActivity.this, "Error: " + fault.getMessage()
-                        , Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        //when you click the refresh button it updates the list
-
-        ivRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Backendless.Data.of(Book.class).find(new AsyncCallback<List<Book>>(){
-                    @Override
-                    public void handleResponse( List<Book> foundBooks )
-                    {
-
-                        ApplicationClass.books = foundBooks;
-                        myAdapter = new BookAdapter(HomeActivity.this, (ArrayList<Book>) ApplicationClass.books);
-
-                        //set adapter for recylcer view
-
-                        recyclerView.setAdapter(myAdapter);
-
-                    }
-                    @Override
-                    public void handleFault( BackendlessFault fault )
-                    {
-
-                        Toast.makeText(HomeActivity.this, "Error: " + fault.getMessage()
-                                , Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-            }
-        });
-
-        //when the add book button is pressed it takes the user to a screen to add books
-
-        btnAddBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(HomeActivity.this, AddBookActivity.class);
-                startActivityForResult(intent, 1);
-
-            }
-        });
-    }
-
-    //when activity started from add book screen update the list
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == 1){
-
-            myAdapter.notifyDataSetChanged();
-        }
     }
 
     //in the implentation of the BookAdapter interface, if an item is clicked
     //then start the book description activity with the information on the book
-
-    @Override
-    public void onItemClicked(int index) {
-        Intent intent = new Intent(HomeActivity.this, BookDescriptionActivity.class);
-        intent.putExtra("book", index);
-        startActivity(intent);
-
-    }
 
     //following methods help set up the hamburger menu
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
-        switch (item.getItemId()) {
+        /*switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.home:
+                startActivity(new Intent(getApplicationContext(), HomeActivityFrag.class));
+                break;
+            case R.id.my_account:
+                startActivity(new Intent(getApplicationContext(), MyAccountActivity.class));
+                break;
+            case R.id.my_books:
+                startActivity(new Intent(getApplicationContext(), MyBooksActivity.class));
+                break;
+            case R.id.sign_out:
+
+                //when signout button pressed sign out the user
+
+                Backendless.UserService.logout(new AsyncCallback<Void>() {
+                @Override
+                public void handleResponse(Void response) {
+                    Toast.makeText(HomeActivity.this, "Logged Out"
+                            , Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    HomeActivity.this.finish();
+                }
+
+                @Override
+                public void handleFault(BackendlessFault fault) {
+
+                    Toast.makeText(HomeActivity.this, "Error: " + fault.getMessage()
+                            , Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+                break;
+        }
+        // Highlight the selected item has been done by NavigationView
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -189,7 +137,7 @@ public class HomeActivity extends AppCompatActivity implements BookAdapter.ItemC
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        //selectDrawerItem(menuItem);
+                        selectDrawerItem(menuItem);
                         return true;
                     }
                 });
