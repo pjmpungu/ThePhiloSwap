@@ -123,8 +123,14 @@ public class HomeActivity extends AppCompatActivity implements BookAdapter.ItemC
         }
     }
 
+    //in the implentation of the BookAdapter interface, if an item is clicked
+    //then start the book description activity with the information on the book
+
     @Override
     public void onItemClicked(int index) {
+        Intent intent = new Intent(HomeActivity.this, BookDescriptionActivity.class);
+        intent.putExtra("book", index);
+        startActivity(intent);
 
     }
 }
