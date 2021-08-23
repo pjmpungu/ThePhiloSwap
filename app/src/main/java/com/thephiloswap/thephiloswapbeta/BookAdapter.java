@@ -66,6 +66,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
         holder.tvTitle.setText(books.get(position).getTitle());
         holder.tvAuthor.setText(books.get(position).getAuthor());
 
+        //if the book owner is the same as the user, they won't see it
+
+        if(books.get(position).getOwnerEmail().equals(ApplicationClass.user.getEmail())){
+
+            holder.itemView.setVisibility(View.GONE);
+
+        }
+
     }
 
     @Override
