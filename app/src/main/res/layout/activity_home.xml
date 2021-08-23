@@ -7,12 +7,21 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <ListView
+    <ImageButton
+        android:id="@+id/ivRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/refresh" />
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="176dp" />
+        tools:layout_editor_absoluteY="176dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/btnAddBook"

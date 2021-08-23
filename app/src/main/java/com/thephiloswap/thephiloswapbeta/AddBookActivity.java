@@ -57,8 +57,7 @@ public class AddBookActivity extends AppCompatActivity {
                         public void handleResponse(Book response) {
                             Toast.makeText(AddBookActivity.this, "Book added succesfully"
                                     , Toast.LENGTH_SHORT).show();
-                            etAuthor.setText("");
-                            etTitle.setText("");
+                            AddBookActivity.this.finish();
                         }
 
                         @Override

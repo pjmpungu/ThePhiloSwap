@@ -5,6 +5,15 @@ public class Book {
     private String title;
     private String author;
     private String ownerEmail;
+    private String objectId;
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
     public String getTitle() {
         return title;
