@@ -35,6 +35,21 @@
         android:inputType="textPersonName" />
 
     <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Description (optional)" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:maxLength="100" />
+
+    <TextView
         android:id="@+id/tvPicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -6,6 +6,15 @@ public class Book {
     private String author;
     private String ownerEmail;
     private String objectId;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getObjectId() {
         return objectId;

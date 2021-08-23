@@ -19,6 +19,7 @@ public class AddBookActivity extends AppCompatActivity {
 
     EditText etTitle;
     EditText etAuthor;
+    EditText etDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class AddBookActivity extends AppCompatActivity {
 
         etTitle = findViewById(R.id.etTitle);
         etAuthor = findViewById(R.id.etAuthor);
+        etDescription = findViewById(R.id.etDescription);
         btnAdd = findViewById(R.id.btnAdd);
 
         //onclick listener for adding a new book
@@ -39,6 +41,7 @@ public class AddBookActivity extends AppCompatActivity {
 
                 String title = etTitle.getText().toString();
                 String author = etAuthor.getText().toString();
+                String des = etDescription.getText().toString();
 
                 if(title.isEmpty() || author.isEmpty()){
 
@@ -50,6 +53,7 @@ public class AddBookActivity extends AppCompatActivity {
                     Book book = new Book();
                     book.setAuthor(author);
                     book.setTitle(title);
+                    book.setDescription(des);
                     book.setOwnerEmail(ApplicationClass.user.getEmail());
 
                     Backendless.Persistence.save(book, new AsyncCallback<Book>() {
