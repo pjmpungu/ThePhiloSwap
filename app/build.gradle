@@ -43,4 +43,5 @@ dependencies {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
+    implementation 'com.google.android.material:material:1.0.0'
 }

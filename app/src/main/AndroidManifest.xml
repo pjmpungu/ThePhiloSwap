@@ -11,9 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ThePhiloSwap">
-        <activity android:name=".BookDescriptionActivity"
-            android:theme="@style/AppTheme.AppDialogTheme"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".MyAccountActivity"></activity>
+        <activity
+            android:name=".BookDescriptionActivity"
+            android:theme="@style/AppTheme.AppDialogTheme" />
         <activity android:name=".RequestBookActivity" />
         <activity android:name=".AddBookActivity" />
         <activity android:name=".HomeActivity" />
