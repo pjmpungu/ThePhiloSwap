@@ -21,6 +21,22 @@ public class ApplicationClass extends Application {
 
     public static List<Book> books;
 
+    //the next two methods are string methods that will return the email body
+    //for sending an email to the owner of a book
+
+    public static String generateEmail(Book book, String address, String phone){
+
+        String email = "Hello " + book.getOwnerName() + ",\n"
+                +"Philo Swap user " + ApplicationClass.user.getProperty("name")
+                + " has requested your copy of " + book.getTitle() + "."
+                + " Below is their address.\n\n" + address + "\n\n"
+                + "If you'd like to keep in touch, their phone number is " +
+                phone
+                + ".\nThanks for using The Philo Swap!";
+
+        return email;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

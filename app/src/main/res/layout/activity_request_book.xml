@@ -15,20 +15,20 @@
         android:text="Please enter your postal address" />
 
     <EditText
-        android:id="@+id/editTextTextPostalAddress"
+        android:id="@+id/etAddy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPostalAddress" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Please enter your phone number (optional)" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

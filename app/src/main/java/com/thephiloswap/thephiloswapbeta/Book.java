@@ -5,6 +5,16 @@ public class Book {
     private String title;
     private String author;
     private String ownerEmail;
+    private String ownerName;
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
     private String objectId;
     private String description;
 

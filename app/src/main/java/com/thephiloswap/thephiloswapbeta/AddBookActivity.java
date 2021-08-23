@@ -54,6 +54,7 @@ public class AddBookActivity extends AppCompatActivity {
                     book.setAuthor(author);
                     book.setTitle(title);
                     book.setDescription(des);
+                    book.setOwnerName((String) ApplicationClass.user.getProperty("name"));
                     book.setOwnerEmail(ApplicationClass.user.getEmail());
 
                     Backendless.Persistence.save(book, new AsyncCallback<Book>() {
