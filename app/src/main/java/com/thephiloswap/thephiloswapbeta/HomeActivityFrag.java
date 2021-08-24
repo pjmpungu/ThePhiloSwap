@@ -137,4 +137,6 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
         startActivity(intent);
 
     }
+
+
 }

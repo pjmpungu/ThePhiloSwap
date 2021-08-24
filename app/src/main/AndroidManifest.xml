@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyBooksDescriptionActivity"></activity>
+        <activity android:name=".MyBooksDescriptionActivity"
+            android:theme="@style/AppTheme.AppDialogTheme"></activity>
         <activity android:name=".HomeActivityFrag" />
         <activity android:name=".MyBooksActivity" />
         <activity android:name=".MyAccountActivity" />
