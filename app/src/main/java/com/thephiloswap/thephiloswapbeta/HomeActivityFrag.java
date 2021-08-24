@@ -112,7 +112,7 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
             public void onClick(View v) {
 
                 Intent intent = new Intent(HomeActivityFrag.this, AddBookActivity.class);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
 
             }
         });
@@ -120,14 +120,13 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
 
     //when activity started from add book screen update the list
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onResume() {
+        super.onResume();
 
-        if(requestCode == 1){
-
+        if(myAdapter!=null)
             myAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override

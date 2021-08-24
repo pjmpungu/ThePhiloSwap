@@ -1,5 +1,6 @@
 package com.thephiloswap.thephiloswapbeta;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,6 +73,14 @@ public class MyBooksActivity extends HomeActivity implements BookAdapter.ItemCli
         intent.putExtra("book", index);
         startActivity(intent);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(myAdapter!=null)
+            myAdapter.notifyDataSetChanged();
     }
 
 

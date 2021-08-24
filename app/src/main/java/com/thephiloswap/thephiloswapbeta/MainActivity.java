@@ -1,7 +1,9 @@
 package com.thephiloswap.thephiloswapbeta;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +20,7 @@ import com.backendless.persistence.local.UserIdStorageFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tvCreate;
+    TextView tvCreate, tvReset;
     Button btnSignIn;
     EditText etMail, etPass;
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnSignIn = findViewById(R.id.btnSignIn);
         tvCreate = findViewById(R.id.tvNewAccount);
+        tvReset = findViewById(R.id.tvPasswordReset);
         etMail = findViewById(R.id.etEmail);
         etPass = findViewById(R.id.etPassword);
 
@@ -125,6 +128,64 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, NewAccountActivity.class);
                 startActivity(intent);
+
+            }
+        });
+
+        //clicking on reset password sends a reset email
+
+        tvReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //if email is empty ask user to enter en email
+                String email = etMail.getText().toString();
+                if(email.isEmpty()){
+
+                    Toast.makeText(MainActivity.this, "Please enter a valid email address in the email box"
+                            , Toast.LENGTH_SHORT).show();
+
+                }else{
+
+                    //make an alert dialog to confirm password reset
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    //Yes button clicked, reset password
+
+                                    Backendless.UserService.restorePassword( email, new AsyncCallback<Void>()
+                                    {
+                                        public void handleResponse( Void response )
+                                        {
+                                            Toast.makeText(MainActivity.this, "Reset link was sent to your email"
+                                                    , Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        public void handleFault( BackendlessFault fault )
+                                        {
+                                            // password revovery failed, to get the error code call fault.getCode()
+
+                                            Toast.makeText(MainActivity.this, "Error: " + fault.getMessage()
+                                                    , Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Confirm Password Reset").setPositiveButton("Confirm", dialogClickListener)
+                            .setNegativeButton("Cancel", dialogClickListener).show();
+
+                }
 
             }
         });

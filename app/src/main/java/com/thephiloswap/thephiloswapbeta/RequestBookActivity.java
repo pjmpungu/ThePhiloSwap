@@ -64,9 +64,6 @@ public class RequestBookActivity extends AppCompatActivity {
                                 @Override
                                 public void handleResponse(MessageStatus response) {
 
-                                    RequestBookActivity.this.finish();
-                                    Toast.makeText(RequestBookActivity.this, "Your request has been sent"
-                                            , Toast.LENGTH_SHORT).show();
 
                                     //remove the book from the list and database once the email has been sent
 
@@ -75,6 +72,9 @@ public class RequestBookActivity extends AppCompatActivity {
                                         public void handleResponse(Long response) {
 
                                             ApplicationClass.books.remove(index);
+                                            RequestBookActivity.this.finish();
+                                            Toast.makeText(RequestBookActivity.this, "Your request has been sent"
+                                                    , Toast.LENGTH_SHORT).show();
 
                                         }
 

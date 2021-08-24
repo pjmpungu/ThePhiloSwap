@@ -1,5 +1,6 @@
 package com.thephiloswap.thephiloswapbeta;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -61,13 +62,14 @@ public class BookDescriptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                BookDescriptionActivity.this.finish();
                 Intent intent = new Intent(BookDescriptionActivity.this, RequestBookActivity.class);
                 intent.putExtra("index", index);
                 startActivity(intent);
+                BookDescriptionActivity.this.finish();
 
             }
         });
 
     }
+
 }
