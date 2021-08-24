@@ -7,20 +7,18 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
-public class BookDescriptionActivity extends AppCompatActivity {
+public class MyBooksDescriptionActivity extends AppCompatActivity {
 
-    TextView tvTitle, tvAuthor, tvDes;
+    EditText etTitle, etAuthor, etDes;
 
     Button btnCancel, btnSwap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_description);
-
-        //setup this activity so it's a popup
+        setContentView(R.layout.activity_my_books_description);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -29,45 +27,40 @@ public class BookDescriptionActivity extends AppCompatActivity {
 
         getWindow().setLayout((int)(width * 0.75),(int)(height * 0.75));
 
-        tvTitle = findViewById(R.id.tvBDTitle);
-        tvAuthor = findViewById(R.id.tvBDAuthor);
-        tvDes = findViewById(R.id.tvBDDescription);
 
-        btnCancel = findViewById(R.id.btnExit);
+        etTitle = findViewById(R.id.etBDTitle);
+        etAuthor = findViewById(R.id.etBDAuthor);
+        etDes = findViewById(R.id.etDes);
+
+        btnCancel = findViewById(R.id.btnDelete);
         btnSwap = findViewById(R.id.btnSave);
 
         //use index from intent to display data of the book
 
         int index = getIntent().getIntExtra("book", 0);
 
-        tvTitle.setText("Title: " + ApplicationClass.books.get(index).getTitle());
-        tvAuthor.setText("Author: " + ApplicationClass.books.get(index).getAuthor());
-        tvDes.setText(ApplicationClass.books.get(index).getDescription());
+        etTitle.setText("Title: " + ApplicationClass.books.get(index).getTitle());
+        etAuthor.setText("Author: " + ApplicationClass.books.get(index).getAuthor());
+        etDes.setText(ApplicationClass.books.get(index).getDescription());
 
-        //when cancel button is pressed close the activity
+        //when delete button is pressed delete the book
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                BookDescriptionActivity.this.finish();
-
             }
         });
 
-        //if swap button pressed, open up the request book activity
+        //if save button is pressed save changes to book
 
         btnSwap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                BookDescriptionActivity.this.finish();
-                Intent intent = new Intent(BookDescriptionActivity.this, RequestBookActivity.class);
-                intent.putExtra("index", index);
-                startActivity(intent);
+
 
             }
         });
-
     }
 }

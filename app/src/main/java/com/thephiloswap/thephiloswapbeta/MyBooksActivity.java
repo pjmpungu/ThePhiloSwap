@@ -6,11 +6,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
+
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyBooksActivity extends HomeActivity implements BookAdapter.ItemClicked {
 
@@ -30,18 +37,40 @@ public class MyBooksActivity extends HomeActivity implements BookAdapter.ItemCli
 
         recyclerView = findViewById(R.id.list);
 
-        myAdapter = new BookAdapter(MyBooksActivity.this, (ArrayList<Book>) ApplicationClass.books, true);
+        Backendless.Data.of(Book.class).find(new AsyncCallback<List<Book>>(){
+            @Override
+            public void handleResponse( List<Book> foundBooks )
+            {
 
-        //set adapter for recylcer view
+                ApplicationClass.books = foundBooks;
+                myAdapter = new BookAdapter(MyBooksActivity.this, (ArrayList<Book>) ApplicationClass.books, true);
 
-        recyclerView.setAdapter(myAdapter);
-        layoutManager = new LinearLayoutManager(MyBooksActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
+                //set adapter for recylcer view
+
+                recyclerView.setAdapter(myAdapter);
+                layoutManager = new LinearLayoutManager(MyBooksActivity.this);
+                recyclerView.setLayoutManager(layoutManager);
+
+            }
+            @Override
+            public void handleFault( BackendlessFault fault )
+            {
+
+                Toast.makeText(MyBooksActivity.this, "Error: " + fault.getMessage()
+                        , Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 
     @Override
     public void onItemClicked(int index) {
+
+        //when an item is clicked open up the book description index
+        Intent intent = new Intent(MyBooksActivity.this, MyBooksDescriptionActivity.class);
+        intent.putExtra("book", index);
+        startActivity(intent);
 
     }
 }

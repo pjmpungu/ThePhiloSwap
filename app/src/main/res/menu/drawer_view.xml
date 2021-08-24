@@ -7,15 +7,15 @@
             android:title="Home" />
         <item
             android:id="@+id/my_account"
-            android:icon="@drawable/home"
+            android:icon="@drawable/person"
             android:title="My Account" />
         <item
             android:id="@+id/my_books"
-            android:icon="@drawable/home"
+            android:icon="@drawable/book"
             android:title="My Books" />
         <item
             android:id="@+id/sign_out"
-            android:icon="@drawable/home"
+            android:icon="@drawable/exit"
             android:title="Sign Out" />
     </group>
 </menu>
