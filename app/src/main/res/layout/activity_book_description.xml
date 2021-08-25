@@ -4,17 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/icons"
     android:gravity="center_vertical"
     android:orientation="vertical"
     tools:context=".BookDescriptionActivity">
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        app:srcCompat="@drawable/image" />
 
     <TextView
         android:id="@+id/tvBDTitle"
@@ -25,7 +18,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/primary_text"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvBDAuthor"
@@ -36,7 +31,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/primary_text"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvBDDescription"
@@ -47,7 +44,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/primary_text"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,6 +65,7 @@
             android:layout_weight="1"
             android:background="@drawable/buttons"
             android:text="Cancel"
+            android:textColor="@color/primary_text"
             app:backgroundTint="@android:color/holo_red_dark" />
 
         <Button
@@ -78,7 +78,9 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/buttons"
-            android:text="Swap" />
+            android:text="Swap"
+            app:backgroundTint="@color/primary"
+            android:textColor="@color/primary_text" />
     </LinearLayout>
 
 </LinearLayout>

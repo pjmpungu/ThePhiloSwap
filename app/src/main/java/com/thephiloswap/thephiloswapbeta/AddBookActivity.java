@@ -2,16 +2,25 @@ package com.thephiloswap.thephiloswapbeta;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+
+import java.io.FileNotFoundException;
 
 public class AddBookActivity extends AppCompatActivity {
 
@@ -20,7 +29,6 @@ public class AddBookActivity extends AppCompatActivity {
     EditText etTitle;
     EditText etAuthor;
     EditText etDescription;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,19 +51,18 @@ public class AddBookActivity extends AppCompatActivity {
                 String author = etAuthor.getText().toString();
                 String des = etDescription.getText().toString();
 
-                if(title.isEmpty() || author.isEmpty()){
+                if (title.isEmpty() || author.isEmpty()) {
 
                     Toast.makeText(AddBookActivity.this, "Please enter all fields"
                             , Toast.LENGTH_SHORT).show();
 
-                }else{
+                } else {
 
                     Book book = new Book();
                     book.setAuthor(author);
                     book.setTitle(title);
                     book.setDescription(des);
-                    book.setOwnerName((String) ApplicationClass.user.getProperty("name"));
-                    book.setOwnerEmail(ApplicationClass.user.getEmail());
+                    book.setOwnerObjectId(ApplicationClass.user.getObjectId());
 
                     Backendless.Persistence.save(book, new AsyncCallback<Book>() {
                         @Override
@@ -78,5 +85,8 @@ public class AddBookActivity extends AppCompatActivity {
 
             }
         });
+
     }
+
+
 }

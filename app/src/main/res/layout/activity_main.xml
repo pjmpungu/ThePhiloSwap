@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_light"
     android:gravity="center_vertical"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -17,9 +18,11 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif"
         android:text="Login"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textColor="@color/primary_text"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvEmail"
@@ -30,7 +33,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Email" />
+        android:text="Email"
+        android:textColor="@color/primary_text" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -42,7 +46,8 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColor="@color/primary_text" />
 
     <TextView
         android:id="@+id/tvPassword"
@@ -53,7 +58,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Password" />
+        android:text="Password"
+        android:textColor="@color/primary_text" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -65,7 +71,8 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="@color/primary_text" />
 
     <Button
         android:id="@+id/btnSignIn"
@@ -88,9 +95,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:gravity="center_horizontal"
-        android:text="Create an account"
-        android:textColor="@color/black"
+        android:text="Create account"
+        android:textColor="@color/secondary_text"
         android:textStyle="bold" />
 
     <TextView
@@ -102,9 +108,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:gravity="center_horizontal"
         android:text="Reset Password"
-        android:textColor="@color/black"
+        android:textColor="@color/secondary_text"
         android:textStyle="bold" />
 
 </LinearLayout>

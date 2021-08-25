@@ -94,7 +94,7 @@ public class MyBooksDescriptionActivity extends AppCompatActivity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MyBooksDescriptionActivity.this);
-                builder.setMessage("Delete " + ApplicationClass.books.get(index).getTitle()).setPositiveButton("Yes", dialogClickListener)
+                builder.setMessage("Delete " + ApplicationClass.books.get(index).getTitle() + "?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
             }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="30dp"
+    android:background="@color/primary_light"
     android:gravity="bottom"
     android:orientation="vertical"
     tools:context=".HomeActivityFrag">
@@ -15,13 +16,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/buttons"
         app:srcCompat="@drawable/refresh" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
         tools:layout_editor_absoluteX="113dp"
         tools:layout_editor_absoluteY="176dp">
 
@@ -32,6 +34,14 @@
         android:id="@+id/btnAddBook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add your book" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/buttons"
+        android:text="Add your book"
+        android:textColor="@color/primary_text" />
 
 </LinearLayout>

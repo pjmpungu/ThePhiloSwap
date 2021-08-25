@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_light"
     android:gravity="center_vertical"
     android:orientation="vertical"
     tools:context=".RequestBookActivity">
@@ -12,27 +13,51 @@
         android:id="@+id/tvAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please enter your postal address" />
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Please enter your postal address*"
+        android:textColor="@color/primary_text" />
 
     <EditText
         android:id="@+id/etAddy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPostalAddress" />
+        android:inputType="textPostalAddress"
+        android:textColor="@color/primary_text" />
 
     <TextView
         android:id="@+id/tvPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please enter your phone number (optional)" />
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Please enter your phone number (optional)*"
+        android:textColor="@color/primary_text" />
 
     <EditText
         android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:textColor="@color/primary_text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,6 +73,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:background="@drawable/buttons"
             android:text="Cancel" />
 
         <Button
@@ -59,6 +85,19 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:background="@drawable/buttons"
             android:text="Request Book" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="*We won't save or use your address or phone number, this information will be emailed to the book owner so they can send the book to you. We recommend adding your phone number to coordinate any extra details with the book owner." />
 </LinearLayout>

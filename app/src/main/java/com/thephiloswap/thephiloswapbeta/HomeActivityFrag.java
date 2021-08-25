@@ -86,11 +86,7 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
                     {
 
                         ApplicationClass.books = foundBooks;
-                        myAdapter = new BookAdapter(HomeActivityFrag.this, (ArrayList<Book>) ApplicationClass.books, false);
-
-                        //set adapter for recylcer view
-
-                        recyclerView.setAdapter(myAdapter);
+                        myAdapter.notifyDataSetChanged();
 
                     }
                     @Override

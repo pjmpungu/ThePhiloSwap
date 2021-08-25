@@ -9,14 +9,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.messaging.MessageStatus;
+
+import java.util.List;
 
 public class RequestBookActivity extends AppCompatActivity {
 
     Button btnCancel, btnSwap;
     EditText etAddress, etPhone;
+    BackendlessUser owner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,25 @@ public class RequestBookActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.etPhone);
 
         int index = getIntent().getIntExtra("index", 0);
+        Book book = ApplicationClass.books.get(index);
+
+        //first get the user object that represents the owner of the book
+
+        Backendless.Persistence.of(BackendlessUser.class).findById(book.getOwnerObjectId(), new AsyncCallback<BackendlessUser>() {
+            @Override
+
+            public void handleResponse(BackendlessUser response) {
+                owner = response;
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+                Toast.makeText(RequestBookActivity.this, "Error: " + fault.getMessage()
+                        , Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         //when cancel button is clicked return to the home screen
 
@@ -58,9 +81,8 @@ public class RequestBookActivity extends AppCompatActivity {
 
                 }else{
 
-                    Book book = ApplicationClass.books.get(index);
                     Backendless.Messaging.sendTextEmail("Swap Request",
-                            ApplicationClass.generateEmail(book, address, phone), book.getOwnerEmail(), new AsyncCallback<MessageStatus>() {
+                            ApplicationClass.generateEmail(book, address, phone, (String) owner.getProperty("name")), owner.getEmail(), new AsyncCallback<MessageStatus>() {
                                 @Override
                                 public void handleResponse(MessageStatus response) {
 

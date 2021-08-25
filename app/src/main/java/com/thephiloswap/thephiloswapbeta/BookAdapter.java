@@ -71,11 +71,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
 
         //if the book owner is the same as the user, they won't see it
 
-        if(!books.get(position).getOwnerEmail().equals(ApplicationClass.user.getEmail()) && !userBooks){
+        if(!books.get(position).getOwnerObjectId().equals(ApplicationClass.user.getObjectId()) && !userBooks){
 
             holder.itemView.setVisibility(View.VISIBLE);
 
-        }else if(books.get(position).getOwnerEmail().equals(ApplicationClass.user.getEmail()) && userBooks){
+        }else if(books.get(position).getOwnerObjectId().equals(ApplicationClass.user.getObjectId()) && userBooks){
 
             holder.itemView.setVisibility(View.VISIBLE);
 

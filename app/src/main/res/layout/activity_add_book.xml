@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_light"
     android:gravity="center_vertical"
     android:orientation="vertical"
     tools:context=".AddBookActivity">
@@ -12,60 +13,89 @@
         android:id="@+id/tvBookTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title" />
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Title"
+        android:textColor="@color/primary_text" />
 
     <EditText
         android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="@color/primary_text" />
 
     <TextView
         android:id="@+id/tvAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Author" />
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Author"
+        android:textColor="@color/primary_text" />
 
     <EditText
         android:id="@+id/etAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="@color/primary_text" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" Description (optional)" />
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text=" Description (optional)"
+        android:textColor="@color/primary_text" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:maxLength="100" />
-
-    <TextView
-        android:id="@+id/tvPicture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Picture (optional)" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        app:srcCompat="@drawable/ic_baseline_image_search_24" />
+        android:maxLength="100"
+        android:textColor="@color/primary_text" />
 
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Book" />
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/buttons"
+        android:text="Add Book"
+        android:textColor="@color/primary_text" />
 
 </LinearLayout>

@@ -4,16 +4,7 @@ public class Book {
 
     private String title;
     private String author;
-    private String ownerEmail;
-    private String ownerName;
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
+    private String ownerObjectId;
 
     private String objectId;
     private String description;
@@ -50,11 +41,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getOwnerEmail() {
-        return ownerEmail;
+    public String getOwnerObjectId() {
+        return ownerObjectId;
     }
 
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
+    public void setOwnerObjectId(String ownerObjectId) {
+        this.ownerObjectId = ownerObjectId;
     }
 }
