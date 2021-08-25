@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -101,6 +102,9 @@ public class RequestBookActivity extends AppCompatActivity {
                                         public void handleResponse(Long response) {
 
                                             ApplicationClass.swapBooks.remove(index);
+                                            Intent intent = new Intent(RequestBookActivity.this, HomeActivityFrag.class);
+                                            intent.putExtra("book", index);
+                                            startActivity(intent);
                                             RequestBookActivity.this.finish();
                                             Toast.makeText(RequestBookActivity.this, "Your request has been sent"
                                                     , Toast.LENGTH_SHORT).show();
