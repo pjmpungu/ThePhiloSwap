@@ -3,8 +3,12 @@ package com.thephiloswap.thephiloswapbeta;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         etMail = findViewById(R.id.etEmail);
         etPass = findViewById(R.id.etPassword);
 
+
         //sign in button takes the user to the home screen
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }else{
 
+                    showProgress(true);
                     //otherwise log in the user
                     Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
                         @Override
@@ -60,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
                             ApplicationClass.user = response;
                             Intent intent = new Intent(MainActivity.this, HomeActivityFrag.class);
+                            MainActivity.this.finish();
                             startActivity(intent);
+                            showProgress(false);
 
                         }
 
@@ -69,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Toast.makeText(MainActivity.this, "Error: " + fault.getMessage()
                                     , Toast.LENGTH_SHORT).show();
+                            showProgress(false);
 
                         }
                     });
@@ -94,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
                             ApplicationClass.user = response;
                             Intent intent = new Intent(MainActivity.this, HomeActivityFrag.class);
+                            MainActivity.this.finish();
                             startActivity(intent);
+                            showProgress(false);
 
                         }
 
@@ -103,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Toast.makeText(MainActivity.this, "Error: " + fault.getMessage(),
                                     Toast.LENGTH_SHORT).show();
+                            showProgress(false);
 
                         }
                     });
@@ -155,12 +167,14 @@ public class MainActivity extends AppCompatActivity {
                                 case DialogInterface.BUTTON_POSITIVE:
                                     //Yes button clicked, reset password
 
+                                    showProgress(true);
                                     Backendless.UserService.restorePassword( email, new AsyncCallback<Void>()
                                     {
                                         public void handleResponse( Void response )
                                         {
                                             Toast.makeText(MainActivity.this, "Reset link was sent to your email"
                                                     , Toast.LENGTH_SHORT).show();
+                                            showProgress(false);
                                         }
 
                                         public void handleFault( BackendlessFault fault )
@@ -169,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
                                             Toast.makeText(MainActivity.this, "Error: " + fault.getMessage()
                                                     , Toast.LENGTH_SHORT).show();
+                                            showProgress(false);
                                         }
                                     });
 
@@ -190,5 +205,57 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //method for progress bar
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+
+        View content = findViewById(R.id.content);;
+        View mProgressView = findViewById(R.id.login_progress);;
+        TextView tvLoad = findViewById(R.id.tvLoad);;
+
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            content.setVisibility(show ? View.GONE : View.VISIBLE);
+            content.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    content.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+
+            tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
+            tvLoad.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
+            content.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 }

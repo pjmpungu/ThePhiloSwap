@@ -41,9 +41,9 @@ public class BookDescriptionActivity extends AppCompatActivity {
 
         int index = getIntent().getIntExtra("book", 0);
 
-        tvTitle.setText("Title: " + ApplicationClass.books.get(index).getTitle());
-        tvAuthor.setText("Author: " + ApplicationClass.books.get(index).getAuthor());
-        tvDes.setText(ApplicationClass.books.get(index).getDescription());
+        tvTitle.setText("Title: " + ApplicationClass.swapBooks.get(index).getTitle());
+        tvAuthor.setText("Author: " + ApplicationClass.swapBooks.get(index).getAuthor());
+        tvDes.setText(ApplicationClass.swapBooks.get(index).getDescription());
 
         //when cancel button is pressed close the activity
 

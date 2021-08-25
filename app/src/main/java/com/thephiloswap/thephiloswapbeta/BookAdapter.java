@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,26 +14,32 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 //this is the array adapter for the list of available books, basically takes the raw
 //array list and puts it in a format using the list item xml file in resources
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> implements Filterable {
 
     private ArrayList<Book> books;
+    //following list used for searching for items.
+    private ArrayList<Book> booksFull;
     ItemClicked activity;
     boolean userBooks;
 
     public BookAdapter(Context context, ArrayList<Book> list, boolean userBooks){
-        books=list;
+        books = list;
+        this.booksFull = new ArrayList<>(books);
         activity = (ItemClicked) context;
         this.userBooks = userBooks;
+
     }
 
     public interface ItemClicked {
         void onItemClicked(int index);
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -63,23 +71,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull BookAdapter.ViewHolder holder, int position) {
 
-        holder.itemView.setTag(books.get(position));
+            holder.itemView.setTag(books.get(position));
 
-        holder.tvTitle.setText(books.get(position).getTitle());
-        holder.tvAuthor.setText(books.get(position).getAuthor());
-        holder.itemView.setVisibility(View.GONE);
-
-        //if the book owner is the same as the user, they won't see it
-
-        if(!books.get(position).getOwnerObjectId().equals(ApplicationClass.user.getObjectId()) && !userBooks){
-
-            holder.itemView.setVisibility(View.VISIBLE);
-
-        }else if(books.get(position).getOwnerObjectId().equals(ApplicationClass.user.getObjectId()) && userBooks){
-
-            holder.itemView.setVisibility(View.VISIBLE);
-
-        }
+            holder.tvTitle.setText(books.get(position).getTitle());
+            holder.tvAuthor.setText("By " + books.get(position).getAuthor());
 
     }
 
@@ -87,5 +82,53 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
     public int getItemCount() {
         return books.size();
     }
+
+
+    //method from interface to do a search
+
+    @Override
+    public Filter getFilter() {
+        return bookFilter;
+    }
+
+    private Filter bookFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<Book> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0){
+
+                filteredList.addAll(booksFull);
+
+            }else{
+
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Book book: booksFull){
+                    if(book.getTitle().toLowerCase().contains(filterPattern) ||
+                            book.getAuthor().toLowerCase().contains(filterPattern) ||
+                    book.getKeywords().toLowerCase().contains(filterPattern)){
+                        filteredList.add(book);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            books.clear();
+            books.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
 
 }

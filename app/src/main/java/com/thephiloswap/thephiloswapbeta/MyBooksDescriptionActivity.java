@@ -18,7 +18,7 @@ import com.backendless.exceptions.BackendlessFault;
 
 public class MyBooksDescriptionActivity extends AppCompatActivity {
 
-    EditText etTitle, etAuthor, etDes;
+    EditText etTitle, etAuthor, etDes, etKeywords;
 
     Button btnCancel, btnSwap;
 
@@ -38,6 +38,7 @@ public class MyBooksDescriptionActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.etBDTitle);
         etAuthor = findViewById(R.id.etBDAuthor);
         etDes = findViewById(R.id.etDes);
+        etKeywords = findViewById(R.id.etKeywords);
 
         btnCancel = findViewById(R.id.btnDelete);
         btnSwap = findViewById(R.id.btnSave);
@@ -46,9 +47,10 @@ public class MyBooksDescriptionActivity extends AppCompatActivity {
 
         int index = getIntent().getIntExtra("book", 0);
 
-        etTitle.setText(ApplicationClass.books.get(index).getTitle());
-        etAuthor.setText(ApplicationClass.books.get(index).getAuthor());
-        etDes.setText(ApplicationClass.books.get(index).getDescription());
+        etTitle.setText(ApplicationClass.userBooks.get(index).getTitle());
+        etAuthor.setText(ApplicationClass.userBooks.get(index).getAuthor());
+        etDes.setText(ApplicationClass.userBooks.get(index).getDescription());
+        etKeywords.setText(ApplicationClass.userBooks.get(index).getKeywords());
 
         //when delete button is pressed delete the book
 
@@ -65,14 +67,14 @@ public class MyBooksDescriptionActivity extends AppCompatActivity {
                             case DialogInterface.BUTTON_POSITIVE:
                                 //Yes button clicked, delete this book
 
-                                Backendless.Data.of(Book.class).remove(ApplicationClass.books.get(index), new AsyncCallback<Long>() {
+                                Backendless.Data.of(Book.class).remove(ApplicationClass.userBooks.get(index), new AsyncCallback<Long>() {
                                     @Override
                                     public void handleResponse(Long response) {
 
                                         Toast.makeText(MyBooksDescriptionActivity.this, "Removed Succesfully"
                                                 , Toast.LENGTH_SHORT).show();
                                         MyBooksDescriptionActivity.this.finish();
-                                        ApplicationClass.books.remove(index);
+                                        ApplicationClass.userBooks.remove(index);
 
                                     }
 
@@ -94,7 +96,7 @@ public class MyBooksDescriptionActivity extends AppCompatActivity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MyBooksDescriptionActivity.this);
-                builder.setMessage("Delete " + ApplicationClass.books.get(index).getTitle() + "?").setPositiveButton("Yes", dialogClickListener)
+                builder.setMessage("Delete " + ApplicationClass.userBooks.get(index).getTitle() + "?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
             }
@@ -109,9 +111,10 @@ public class MyBooksDescriptionActivity extends AppCompatActivity {
                 //first check to make sure necessary fileds are filled
                 String title = etTitle.getText().toString();
                 String author = etAuthor.getText().toString();
+                String keywords = etKeywords.getText().toString();
                 String des = etDes.getText().toString();
 
-                if(title.isEmpty() || author.isEmpty()){
+                if(title.isEmpty() || author.isEmpty() || keywords.isEmpty()){
 
                     Toast.makeText(MyBooksDescriptionActivity.this,
                             "Please enter all fields", Toast.LENGTH_SHORT).show();
@@ -120,10 +123,11 @@ public class MyBooksDescriptionActivity extends AppCompatActivity {
 
                     //otherwise update the object
 
-                    ApplicationClass.books.get(index).setTitle(title);
-                    ApplicationClass.books.get(index).setAuthor(author);
-                    ApplicationClass.books.get(index).setDescription(des);
-                    Backendless.Persistence.of(Book.class).save(ApplicationClass.books.get(index), new AsyncCallback<Book>() {
+                    ApplicationClass.userBooks.get(index).setTitle(title);
+                    ApplicationClass.userBooks.get(index).setAuthor(author);
+                    ApplicationClass.userBooks.get(index).setKeywords(keywords);
+                    ApplicationClass.userBooks.get(index).setDescription(des);
+                    Backendless.Persistence.of(Book.class).save(ApplicationClass.userBooks.get(index), new AsyncCallback<Book>() {
                         @Override
                         public void handleResponse(Book response) {
 

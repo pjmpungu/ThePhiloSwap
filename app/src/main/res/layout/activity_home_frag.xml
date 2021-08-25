@@ -6,42 +6,75 @@
     android:layout_height="match_parent"
     android:layout_marginTop="30dp"
     android:background="@color/primary_light"
-    android:gravity="bottom"
     android:orientation="vertical"
+    android:windowSoftInputMode="adjustPan"
     tools:context=".HomeActivityFrag">
 
-    <ImageButton
-        android:id="@+id/ivRefresh"
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/buttons"
-        app:srcCompat="@drawable/refresh" />
+        android:layout_marginTop="200dp"
+        android:visibility="gone" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="176dp">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-
-    <Button
-        android:id="@+id/btnAddBook"
+    <TextView
+        android:id="@+id/tvLoad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/buttons"
-        android:text="Add your book"
-        android:textColor="@color/primary_text" />
+        android:layout_marginTop="25dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:text="Loading...please wait..."
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:windowSoftInputMode="adjustNothing"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/ivRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/buttons"
+            app:srcCompat="@drawable/refresh" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            tools:layout_editor_absoluteX="113dp"
+            tools:layout_editor_absoluteY="176dp"
+            android:windowSoftInputMode="adjustPan">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <Button
+            android:id="@+id/btnAddBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/buttons"
+            android:text="Add your book"
+            android:textColor="@color/primary_text" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.app.Application;
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationClass extends Application {
@@ -20,6 +21,8 @@ public class ApplicationClass extends Application {
     //list to hold a list of all available books to be swapped
 
     public static List<Book> books;
+    public static List<Book> userBooks = new ArrayList<Book>();
+    public static List<Book> swapBooks = new ArrayList<Book>();
 
     //the next two methods are string methods that will return the email body
     //for sending an email to the owner of a book

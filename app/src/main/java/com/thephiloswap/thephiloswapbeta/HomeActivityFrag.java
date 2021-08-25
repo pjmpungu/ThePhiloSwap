@@ -5,14 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
@@ -28,7 +37,7 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
     ImageButton ivRefresh;
 
     RecyclerView recyclerView;
-    RecyclerView.Adapter myAdapter;
+    BookAdapter myAdapter;
     RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -49,6 +58,7 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
         recyclerView = findViewById(R.id.list);
 
 
+        showProgress(true);
 
         Backendless.Data.of(Book.class).find(new AsyncCallback<List<Book>>(){
             @Override
@@ -56,13 +66,30 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
             {
 
                 ApplicationClass.books = foundBooks;
-                myAdapter = new BookAdapter(HomeActivityFrag.this, (ArrayList<Book>) ApplicationClass.books, false);
+                ApplicationClass.swapBooks.clear();
+                ApplicationClass.userBooks.clear();
+
+                //we have 2 array lists, one for books owned by the user, and one with books they can swap
+                for(Book book: ApplicationClass.books) {
+
+                    if (book.getOwnerObjectId().equals(ApplicationClass.user.getObjectId())) {
+
+                        ApplicationClass.userBooks.add(book);
+
+                    } else {
+
+                        ApplicationClass.swapBooks.add(book);
+
+                    }
+                }
+                myAdapter = new BookAdapter(HomeActivityFrag.this, (ArrayList<Book>) ApplicationClass.swapBooks, false);
 
                 //set adapter for recylcer view
 
                 recyclerView.setAdapter(myAdapter);
                 layoutManager = new LinearLayoutManager(HomeActivityFrag.this);
                 recyclerView.setLayoutManager(layoutManager);
+                showProgress(false);
 
             }
             @Override
@@ -71,6 +98,7 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
 
                 Toast.makeText(HomeActivityFrag.this, "Error: " + fault.getMessage()
                         , Toast.LENGTH_SHORT).show();
+                showProgress(false);
 
             }
         });
@@ -80,13 +108,31 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
         ivRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                showProgress(true);
                 Backendless.Data.of(Book.class).find(new AsyncCallback<List<Book>>(){
                     @Override
                     public void handleResponse( List<Book> foundBooks )
                     {
 
                         ApplicationClass.books = foundBooks;
+                        ApplicationClass.swapBooks.clear();
+                        ApplicationClass.userBooks.clear();
+                        //we have 2 array lists, one for books owned by the user, and one with books they can swap
+                        for(Book book: ApplicationClass.books) {
+
+                            if (book.getOwnerObjectId().equals(ApplicationClass.user.getObjectId())) {
+
+                                ApplicationClass.userBooks.add(book);
+
+                            } else {
+
+                                ApplicationClass.swapBooks.add(book);
+
+                            }
+                        }
                         myAdapter.notifyDataSetChanged();
+                        showProgress(false);
 
                     }
                     @Override
@@ -95,6 +141,7 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
 
                         Toast.makeText(HomeActivityFrag.this, "Error: " + fault.getMessage()
                                 , Toast.LENGTH_SHORT).show();
+                        showProgress(false);
 
                     }
                 });
@@ -133,5 +180,84 @@ public class HomeActivityFrag extends HomeActivity implements BookAdapter.ItemCl
 
     }
 
+    //method for progress bar
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
 
+        View content = findViewById(R.id.content);;
+        View mProgressView = findViewById(R.id.login_progress);;
+        TextView tvLoad = findViewById(R.id.tvLoad);;
+
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            content.setVisibility(show ? View.GONE : View.VISIBLE);
+            content.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    content.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+
+            tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
+            tvLoad.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
+            content.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
+
+    //code for creating search bar
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                myAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+
+    }
 }

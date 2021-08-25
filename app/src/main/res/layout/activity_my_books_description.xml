@@ -18,6 +18,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
+        android:hint="Title"
         android:textColor="@color/primary_text" />
 
     <EditText
@@ -29,6 +30,19 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
+        android:hint="Author"
+        android:textColor="@color/primary_text" />
+
+    <EditText
+        android:id="@+id/etKeywords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Keywords"
         android:textColor="@color/primary_text" />
 
     <EditText
@@ -40,6 +54,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
+        android:hint="Description"
         android:textColor="@color/primary_text" />
 
     <LinearLayout
