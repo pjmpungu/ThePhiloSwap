@@ -17,7 +17,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:paddingTop="100dp"
-        android:text="Create Account"
+        android:text="@string/create_account2"
         android:textColor="@color/primary_text"
         android:textColorLink="#FFFFFF"
         android:textSize="40sp"
@@ -37,7 +37,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Name"
+            android:text="@string/name"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -59,7 +59,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Email"
+            android:text="@string/email"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -81,7 +81,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Password"
+            android:text="@string/password"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -103,7 +103,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Confirm Password"
+            android:text="@string/confirm_password"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -133,7 +133,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/buttons"
-                android:text="Back to Login "
+                android:text="@string/back_to_login"
                 android:textColor="@color/primary_text" />
 
             <Button
@@ -144,17 +144,10 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/buttons"
-                android:text="Register"
+                android:text="@string/register"
                 android:textColor="@color/primary_text"
                 android:textStyle="bold" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvError"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:visibility="gone" />
 
     </LinearLayout>
 

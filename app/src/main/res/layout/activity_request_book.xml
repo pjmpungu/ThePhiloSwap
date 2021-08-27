@@ -26,7 +26,7 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center_horizontal"
-        android:text="Loading...please wait..."
+        android:text="@string/loading_please_wait"
         android:textColor="@color/primary"
         android:textStyle="bold"
         android:visibility="gone" />
@@ -47,7 +47,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Please enter your postal address*"
+            android:text="@string/please_enter_your_postal_address"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -72,7 +72,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Please enter your phone number (optional)*"
+            android:text="@string/please_enter_your_phone_number_optional"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -103,7 +103,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/buttons"
-                android:text="Cancel" />
+                android:text="@string/cancel" />
 
             <Button
                 android:id="@+id/btnConfirm"
@@ -115,7 +115,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/buttons"
-                android:text="Request Book" />
+                android:text="@string/request_book" />
         </LinearLayout>
 
         <TextView
@@ -128,6 +128,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="*We won't save or use your address or phone number, this information will be emailed to the book owner so they can send the book to you. We recommend adding your phone number to coordinate any extra details with the book owner." />
+            android:text="@string/we_won_t_save_or_use_your_address_or_phone_number_this_information_will_be_emailed_to_the_book_owner_so_they_can_send_the_book_to_you_we_recommend_adding_your_phone_number_to_coordinate_any_extra_details_with_the_book_owner" />
     </LinearLayout>
 </LinearLayout>

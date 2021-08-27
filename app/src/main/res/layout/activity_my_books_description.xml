@@ -18,7 +18,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:hint="Title"
+        android:hint="@string/title"
         android:textColor="@color/primary_text" />
 
     <EditText
@@ -30,7 +30,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:hint="Author"
+        android:hint="@string/author"
         android:textColor="@color/primary_text" />
 
     <EditText
@@ -42,7 +42,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:hint="Keywords"
+        android:hint="@string/keywords"
         android:textColor="@color/primary_text" />
 
     <EditText
@@ -54,7 +54,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:hint="Description"
+        android:hint="@string/description"
         android:textColor="@color/primary_text" />
 
     <LinearLayout
@@ -73,7 +73,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/buttons"
-            android:text="Delete"
+            android:text="@string/delete"
             android:textColor="@color/primary_text"
             app:backgroundTint="@android:color/holo_red_dark" />
 
@@ -87,7 +87,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/buttons"
-            android:text="Save"
+            android:text="@string/save"
             android:textColor="@color/primary_text"
             app:backgroundTint="@color/primary"/>
     </LinearLayout>

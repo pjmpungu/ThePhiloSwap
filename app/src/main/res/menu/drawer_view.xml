@@ -4,18 +4,18 @@
         <item
             android:id="@+id/home"
             android:icon="@drawable/home"
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/my_account"
             android:icon="@drawable/person"
-            android:title="My Account" />
+            android:title="@string/my_account" />
         <item
             android:id="@+id/my_books"
             android:icon="@drawable/book"
-            android:title="My Books" />
+            android:title="@string/my_books" />
         <item
             android:id="@+id/sign_out"
             android:icon="@drawable/exit"
-            android:title="Sign Out" />
+            android:title="@string/sign_out" />
     </group>
 </menu>

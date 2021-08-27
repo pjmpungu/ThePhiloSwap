@@ -64,7 +64,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/buttons"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="@color/primary_text"
             app:backgroundTint="@android:color/holo_red_dark" />
 
@@ -78,7 +78,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/buttons"
-            android:text="Swap"
+            android:text="@string/swap"
             app:backgroundTint="@color/primary"
             android:textColor="@color/primary_text" />
     </LinearLayout>

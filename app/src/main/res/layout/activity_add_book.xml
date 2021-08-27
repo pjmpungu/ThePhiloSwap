@@ -26,7 +26,7 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center_horizontal"
-        android:text="Loading...please wait..."
+        android:text="@string/loading_please_wait"
         android:textColor="@color/primary"
         android:textStyle="bold"
         android:visibility="gone" />
@@ -47,7 +47,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Title"
+            android:text="@string/title"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -72,7 +72,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Author"
+            android:text="@string/author"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -97,7 +97,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Keywords (Philosophy, Political Economy, Politics, etc.)"
+            android:text="@string/keywords_philosophy_political_economy_politics_etc"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -124,7 +124,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:text=" Description (optional)"
+            android:text="@string/description_optional"
             android:textColor="@color/primary_text" />
 
         <EditText
@@ -153,7 +153,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/buttons"
-            android:text="Add Book"
+            android:text="@string/add_book"
             android:textColor="@color/primary_text" />
     </LinearLayout>
 
